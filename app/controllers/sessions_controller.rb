@@ -6,7 +6,8 @@ class SessionsController < ApplicationController
       flash[:success] = "Welcome back, #{user.name}"
       redirect_to dashboard_path
     else
-
+      flash[:error] = "Your credentials are invalid, please try again"
+      redirect_to root_path
     end
   end
 end
