@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'logging in' do
   it 'allows a user to log it with the correct info' do
-    user = User.create(name: "Test", password: "Test")
+    user = User.create(name: "Test", password: "Test", email: "test@app.com")
 
     visit root_path
 
-    fill_in :username, with: user.email
+    fill_in :email, with: user.email
     fill_in :password, with: user.password
 
     click_button  "Login"
