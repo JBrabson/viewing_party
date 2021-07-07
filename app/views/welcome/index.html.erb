@@ -1,5 +1,5 @@
 <h1><%= @welcome_message %></h1>
-<h3><%= @description %></h3>
+<h4><%= @description %></h4>
 <%= form_with url: '/', method: :post, local: true do |f| %>
   <%= f.label :username %>
   <%= f.text_field :username %>
