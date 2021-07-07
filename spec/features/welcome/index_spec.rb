@@ -17,7 +17,7 @@ RSpec.describe 'Welcome Page' do
 
   it 'displays login fields for username and password' do
 # TODO - this test is not performing as expected, although it does pass
-    page.has_field?('Username', type: 'name')
+    page.has_field?('Email', type: 'email')
     page.has_field?('Password', type: 'password')
   end
 
