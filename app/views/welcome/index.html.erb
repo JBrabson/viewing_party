@@ -1,0 +1,10 @@
+<h1><%= @welcome_message %></h1>
+<h3><%= @description %></h3>
+<%= form_with url: '/', method: :post, local: true do |f| %>
+  <%= f.label :username %>
+  <%= f.text_field :username %>
+  <%= f.label :password %>
+  <%= f.text_field :password %>
+  <%= f.submit 'Login' %>
+<% end %>
+<%= link_to "Ready to Join the Party? Register Here", registration_path %>
