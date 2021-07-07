@@ -22,10 +22,10 @@ RSpec.describe 'Welcome Page' do
     expect(page).to have_button("Login")
   end
 
-  it 'displays link to register' do
-    expect(page).to have_link("Ready to Join the Party? Register Here")
-
-    click_link("Ready to Join the Party? Register Here")
-    expect(current_path).to eq(registration_path)
-  end
+  # it 'displays link to register' do
+  #   expect(page).to have_link("Ready to Join the Party? Register Here")
+  #
+  #   click_link("Ready to Join the Party? Register Here")
+  #   expect(current_path).to eq(registration_path)
+  # end
 end
