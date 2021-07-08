@@ -7,27 +7,24 @@ RSpec.describe 'As a user' do
 
   describe 'When I visit the Registration Page, it' do
     it 'displays welcome message' do
-      expect(page).to have_content(@welcome_message)
+      save_and_open_page
+      expect(page).to have_content('Register Below to Become a V.I.P. of VP!')
     end
 
     it 'displays prompt to register for account' do
-      expect(page).to have_content(@register_message)
-    end
-
-    it 'displays username field' do
-      page.has_field?('Username', type: 'username')
+      expect(page).to have_content('FILL OUT THE BELOW TO GET THIS PARTY STARTED')
     end
 
     it 'displays email field' do
-      page.has_field?('Email', type: 'email')
+      expect(page).to have_field('user[email]')
     end
 
     it 'displays password field' do
-      page.has_field?('Password', type: 'password')
+      expect(page).to have_field('user[password]')
     end
 
     it 'displays password confirmation field' do
-      page.has_field?('Password Confirmation', type: 'password_confirmation')
+      expect(page).to have_field('user[password_confirmation]')
     end
 
     it 'displays button to register' do
@@ -37,14 +34,13 @@ RSpec.describe 'As a user' do
 
   describe 'When I complete registration successfully, it' do
     it 'redirects to user dashboard' do
-      fill_in 'user[username]', with: 'Movie Master'
-      fill_in "user[email]", with: 'moviemaster@email.net'
+      fill_in 'user[email]', with: 'moviemaster@email.net'
       fill_in 'user[password]', with: 'password123'
       fill_in 'user[password_confirmation]', with: 'password123'
 
       click_button('Register')
       expect(current_path).to eq(dashboard_path)
-      expect(page).to have_content('Welcome Movie Master!')
+      expect(page).to have_content('Welcome moviemaster@email.net!')
     end
   end
 

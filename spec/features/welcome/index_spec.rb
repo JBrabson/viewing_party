@@ -6,26 +6,25 @@ RSpec.describe 'Welcome Page' do
   end
 
   it 'displays welcome message' do
-    expect(page).to have_content(@welcome_message)
+    welcome_message = 'Welcome to the (View)Party'
+    expect(page).to have_content(welcome_message)
   end
 
   it 'displays application description' do
-    expect(page).to have_content(@description)
+    description = 'WHERE YOU CAN BRING THE MOVIE TO THE PARTY OR THE PARTY TO THE MOVIE'
+    expect(page).to have_content(description)
   end
 
-  it 'displays login fields for username and password' do
-    page.has_field?('Username', type: 'username')
-    page.has_field?('Password', type: 'password')
+  it 'displays login fields for email and password' do
+    expect(page).to have_field('email', type: 'text')
+    expect(page).to have_field('password', type: 'text')
   end
 
   it 'displays button to log in' do
     expect(page).to have_button("Login")
   end
 
-  # it 'displays link to register' do
-  #   expect(page).to have_link("Ready to Join the Party? Register Here")
-  #
-  #   click_link("Ready to Join the Party? Register Here")
-  #   expect(current_path).to eq(registration_path)
-  # end
+  it 'displays link to register' do
+    expect(page).to have_link("Ready to Join the Party? Register Here")
+  end
 end
