@@ -15,7 +15,7 @@ RSpec.describe 'Welcome Page' do
     expect(page).to have_content(description)
   end
 
-  it 'displays login fields for username and password' do
+  it 'displays login fields for email and password' do
     expect(page).to have_field('email', type: 'text')
     expect(page).to have_field('password', type: 'text')
   end
