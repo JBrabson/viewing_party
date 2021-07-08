@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
   def index
-    @user = User.find_by(session[:user_id])
+    @user = User.find_by(id: current_user.id)
   end
 end
