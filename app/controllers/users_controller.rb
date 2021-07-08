@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def create
     user_params[:email] = user_params[:email].downcase
-    new_user = User.create!(user_params)
+    new_user = User.create(user_params)
     if new_user.save
       session[:user_id] = new_user.id
       flash[:success] = "Welcome #{new_user.name}"
@@ -17,15 +17,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def registration_retry
+    flash[:error] = 'Password and confirmation must match. Please try again.'
+    redirect_to registration_path
+  end
 
   private
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  end
-  
-  def registration_retry
-    flash[:error] = 'Password and confirmation must match. Please try again.'
-    redirect_to registration_path
   end
 end

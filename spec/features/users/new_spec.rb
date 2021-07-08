@@ -50,5 +50,20 @@ RSpec.describe 'As a user' do
       expect(page).to have_content("Welcome #{user[:name]}")
     end
   end
+
+  describe 'When passwords do not match, it' do
+    it 'redirects to new registration with error message' do
+      user = {name: 'Movie Master', email: 'moviemaster@email.net',
+      password: 'password123', password_confirmation: 'password'}
+
+      fill_in 'user[name]', with: user[:name]
+      fill_in 'user[email]', with: user[:email]
+      fill_in 'user[password]', with: user[:password]
+      fill_in 'user[password_confirmation]', with: user[:password_confirmation]
+      click_button('Register')
+      expect(current_path).to eq(registration_path)
+      expect(page).to have_content('Password and confirmation must match. Please try again.')
+    end
+  end
   #add tests for edgecase/fields blank
 end
