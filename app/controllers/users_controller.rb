@@ -17,14 +17,15 @@ class UsersController < ApplicationController
     end
   end
 
-  def registration_retry
-    flash[:error] = 'Password and confirmation must match. Please try again.'
-    redirect_to registration_path
-  end
 
   private
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+  
+  def registration_retry
+    flash[:error] = 'Password and confirmation must match. Please try again.'
+    redirect_to registration_path
   end
 end
