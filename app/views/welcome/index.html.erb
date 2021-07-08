@@ -1,8 +1,8 @@
 <h1><%= @welcome_message %></h1>
 <h4><%= @description %></h4>
 <%= form_with url: root_path, method: :post, local: true do |f| %>
-  <%= f.label :username %>
-  <%= f.text_field :username %>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
   <%= f.label :password %>
   <%= f.text_field :password %>
   <%= f.submit 'Login' %>
