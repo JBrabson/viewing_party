@@ -15,6 +15,10 @@ RSpec.describe 'As a user' do
       expect(page).to have_content('FILL OUT THE BELOW TO GET THIS PARTY STARTED')
     end
 
+    it 'displays name field' do
+      expect(page).to have_field('user[name]')
+    end
+
     it 'displays email field' do
       expect(page).to have_field('user[email]')
     end
@@ -34,13 +38,17 @@ RSpec.describe 'As a user' do
 
   describe 'When I complete registration successfully, it' do
     it 'redirects to user dashboard' do
-      fill_in 'user[email]', with: 'moviemaster@email.net'
-      fill_in 'user[password]', with: 'password123'
-      fill_in 'user[password_confirmation]', with: 'password123'
+      user = {name: 'Movie Master', email: 'moviemaster@email.net',
+      password: 'password123'}
+      fill_in 'user[name]', with: user[:name]
+      fill_in 'user[email]', with: user[:email]
+      fill_in 'user[password]', with: user[:password]
+      fill_in 'user[password_confirmation]', with: user[:password]
 
+      save_and_open_page
       click_button('Register')
       expect(current_path).to eq(dashboard_path)
-      expect(page).to have_content('Welcome moviemaster@email.net!')
+      expect(page).to have_content("Welcome #{user[:name]}")
     end
   end
 
