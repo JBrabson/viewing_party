@@ -10,7 +10,7 @@ RSpec.describe 'discover movies' do
     it 'click on discover movies and be taken to the discover movies page' do
       visit dashboard_path
       click_link 'Discover Movies'
-      expect(current_path).to eq('/movies/discover')
+      expect(current_path).to eq('/discover')
     end
   end
 end
