@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     new_user = User.create!(user_params)
     if new_user.save
       session[:user_id] = new_user.id
-      flash[:success] = "Welcome #{new_user.email}"
+      flash[:success] = "Welcome #{new_user.name}"
       redirect_to dashboard_path
     else
       registration_retry

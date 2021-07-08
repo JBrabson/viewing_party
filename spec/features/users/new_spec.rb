@@ -7,7 +7,6 @@ RSpec.describe 'As a user' do
 
   describe 'When I visit the Registration Page, it' do
     it 'displays welcome message' do
-      save_and_open_page
       expect(page).to have_content('Register Below to Become a V.I.P. of VP!')
     end
 
@@ -40,17 +39,16 @@ RSpec.describe 'As a user' do
     it 'redirects to user dashboard' do
       user = {name: 'Movie Master', email: 'moviemaster@email.net',
       password: 'password123'}
+
       fill_in 'user[name]', with: user[:name]
       fill_in 'user[email]', with: user[:email]
       fill_in 'user[password]', with: user[:password]
       fill_in 'user[password_confirmation]', with: user[:password]
-
-      save_and_open_page
       click_button('Register')
+
       expect(current_path).to eq(dashboard_path)
       expect(page).to have_content("Welcome #{user[:name]}")
     end
   end
-
   #add tests for edgecase/fields blank
 end
