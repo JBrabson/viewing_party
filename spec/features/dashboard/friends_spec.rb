@@ -26,16 +26,37 @@ RSpec.describe 'user dashboard' do
       end
     end
 
-  #   describe 'with a place to add friends'
-  #     it 'has a place to add friends' do
-  #       expect(page).to have_content()
-  #     end
-  #     it 'with a valid email' do
-  #
-  #     end
-  #
-  #     it 'but not with an invalid email' do
-  #
-  #     end
+    describe 'with a place to add friends'
+      it 'has a place to add friends' do
+        expect(page).to have_field(:friends_email)
+        expect(page).to have_button("Add Friend")
+      end
+
+      it 'with a valid email' do
+        fill_in :friends_email, with: @friend.email
+        click_button "Add Friend"
+        
+        expect(current_path).to eq(dashboard_path)
+        expect(page).to have_content("#{@friend.name} is now in your circle of trust")
+
+        within('#friends') do
+          expect(page).to have_content("#{@friend.name}")
+        end
+      end
+
+      it 'but not with an invalid email' do
+        dumb_email = 'pickles@nope.yo'
+
+        fill_in :friends_email, with: dumb_email
+        click_button "Add Friend"
+
+        expect(current_path).to eq(dashboard_path)
+        expect(page).to have_content("#{dumb_email} is not a partier")
+
+        within('#friends') do
+          expect(page).to have_content('You currently have no friends.')
+        end
+
+      end
   end
 end
