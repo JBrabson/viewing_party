@@ -7,6 +7,7 @@ RSpec.describe 'user dashboard' do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
     visit '/dashboard'
   end
+  
   describe 'has a friends section' do
     it 'has a header' do
       expect(page).to have_content('Your Friends')
@@ -35,7 +36,7 @@ RSpec.describe 'user dashboard' do
       it 'with a valid email' do
         fill_in :friends_email, with: @friend.email
         click_button "Add Friend"
-        
+
         expect(current_path).to eq(dashboard_path)
         expect(page).to have_content("#{@friend.name} is now in your circle of trust")
 
@@ -56,7 +57,6 @@ RSpec.describe 'user dashboard' do
         within('#friends') do
           expect(page).to have_content('You currently have no friends.')
         end
-
       end
   end
 end
