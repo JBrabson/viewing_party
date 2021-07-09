@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   post '/', to: 'sessions#new'
   get '/dashboard', to: 'dashboard#index'
   get '/discover', to: 'discover#index'
+  post '/friendships', to: 'friendships#create'
 end
