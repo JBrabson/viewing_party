@@ -11,9 +11,15 @@ RSpec.describe 'user dashboard' do
     expect(page).to have_content("Welcome #{@user.name}!")
   end
 
-  it 'has expected links' do
+  it 'has expected link to discover movies' do
     expect(page).to have_link('Discover Movies')
-    expect(page).to have_link('Friends')
-    expect(page).to have_link('Your Viewing Parties')
+  end
+
+  it 'has a friends section' do
+    expect(page).to have_content('Your Friends')
+  end
+
+  it 'has a viewing parties section' do
+    expect(page).to have_content('Your Viewing Parties')
   end
 end
