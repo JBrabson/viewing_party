@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'user dashboard' do
   before :each do
     @user = User.create!(email: 'test@app.com', name: 'n4me', password: 'passw0rd')
+    @friend = User.create!(email: 'friend@app.com', name: 'fr1end', password: 'p4ssword')
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
     visit dashboard_path
   end
@@ -27,8 +28,10 @@ RSpec.describe 'user dashboard' do
     # end
 
     it 'displays friends list if the user has friends' do
-      @friend = User.create!(email: 'friend@app.com', name: 'fr1end', password: 'p4ssword')
-      Friendship.create!(user_id: @user.id, friend_id: @friend.id)
+      @user.friendships.create!(:friend_id => @friend.id)
+      require 'pry';binding.pry
+
+      # Friendship.create!(user_id: @user.id, friend_id: @friend.id)
       within('#friends') do
         expect(page).to have_content("#{@friend.name}")
       end
