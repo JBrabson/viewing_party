@@ -4,9 +4,9 @@
 
 <%= link_to 'Discover Movies', discover_path %>
 <div id='friends' >
-  <%= form_with url: friendship_path, method: :post, local: true do |form| %>
-    <%= form.lable :friend_email %>
-    <%= form.text_field :friend_email %>
+  <%= form_with url: friendships_path, method: :post, local: true do |form| %>
+    <%= form.label :friends_email %>
+    <%= form.text_field :friends_email %>
     <%= form.submit 'Add Friend' %>
   <% end %>
   <h3>Your Friends</h3>
