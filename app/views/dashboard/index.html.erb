@@ -4,6 +4,11 @@
 
 <%= link_to 'Discover Movies', discover_path %>
 <div id='friends' >
+  <%= form_with url: friendship_path, method: :post, local: true do |form| %>
+    <%= form.lable :friend_email %>
+    <%= form.text_field :friend_email %>
+    <%= form.submit 'Add Friend' %>
+  <% end %>
   <h3>Your Friends</h3>
   <% if @user.friends.empty? %>
     <p>You currently have no friends.</p>
@@ -13,5 +18,4 @@
     <% end %>
   <% end %>
 </div>
-<!-- if friends then list each friend name else show no friend message -->
 <h3>Your Viewing Parties</h3>
