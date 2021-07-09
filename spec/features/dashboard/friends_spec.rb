@@ -5,7 +5,7 @@ RSpec.describe 'user dashboard' do
     @user = User.create!(email: 'test@app.com', name: 'n4me', password: 'passw0rd')
     @friend = User.create!(email: 'friend@app.com', name: 'fr1end', password: 'p4ssword')
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
-    visit dashboard_path
+    visit '/dashboard'
   end
   describe 'has a friends section' do
     it 'has a header' do
@@ -20,6 +20,7 @@ RSpec.describe 'user dashboard' do
 
     it 'displays friends list if the user has friends' do
       @user.friendships.create!(:friend_id => @friend.id)
+      refresh
       within('#friends') do
         expect(page).to have_content("#{@friend.name}")
       end
