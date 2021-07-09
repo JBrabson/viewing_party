@@ -3,5 +3,15 @@
 <%= link_to 'Log Out' %>
 
 <%= link_to 'Discover Movies', discover_path %>
-<h3>Your Friends</h3>
+<div id='friends' >
+  <h3>Your Friends</h3>
+  <% if @user.friends.empty? %>
+    <p>You currently have no friends.</p>
+  <% else %>
+    <% @user.friends.each do |friend| %>
+      <%= friend.name %>
+    <% end %>
+  <% end %>
+</div>
+<!-- if friends then list each friend name else show no friend message -->
 <h3>Your Viewing Parties</h3>
