@@ -65,5 +65,5 @@ RSpec.describe 'As a user' do
       expect(page).to have_content('Password and confirmation must match. Please try again.')
     end
   end
-  #add tests for edgecase/fields blank
+  #TODO add tests for edgecase/fields blank and flash messages
 end
