@@ -3,26 +3,26 @@ require 'rails_helper'
 feature 'search movies by keyword' do
   before :each do
     @user = User.create!(email: 'test@app.com', name: 'n4me', password: 'passw0rd')
-    @@keyword = 'star wars'
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
     visit discover_path
   end
-  it 'returns 40 results' do
+  it 'returns results' do
+    star_wars = 'star wars'
     response_body = File.open("#{Rails.root}/spec/fixtures/moviedb_api/star_wars_search_results.json")
     stub_request(
-      :get, "https://api.themoviedb.org/3/search/movie?api_key=#{ENV['MOVIEDB_API_KEY']}&query=#{@keyword}&"
+      :get, "https://api.themoviedb.org/3/search/movie?api_key=#{ENV['MOVIEDB_API_KEY']}&query=#{star_wars}&"
     ).to_return(
       status: 200, body: response_body
     )
-    fill_in :movie_title, with: @keyword
+    fill_in :movie_title, with: star_wars
     click_button 'Search Movies'
     expect(current_path).to eq(discover_path)
-    expect(page).to have_content("Results for #{@keyword}:")
+    expect(page).to have_content("Results for #{star_wars}:")
     within('#results') do
-      expect(page).to have_content("Star Wars")
-      expect(page).to have_content("Vote Average: 8.2")
-      expect(page).to have_content("Star Wars: The Rise of Skywalker")
-      expect(page).to have_content("Vote Average: 6.5")
+      response.body[:results].each do |result|
+        expect(page).to have_link(result[:title])
+        expect(page).to have_content("Vote Average: #{result[:vote_average]}")
+      end
     end
   end
 end
