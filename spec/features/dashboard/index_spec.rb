@@ -13,6 +13,8 @@ RSpec.describe 'user dashboard' do
 
   it 'has expected link to discover movies' do
     expect(page).to have_link('Discover Movies')
+    click_link 'Discover Movies'
+    expect(current_path).to eq(discover_path)
   end
 
     it 'has a header' do
