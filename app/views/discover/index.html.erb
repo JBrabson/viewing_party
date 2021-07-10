@@ -3,7 +3,7 @@
 <%= button_to 'Find Top Rated Movies', movies_index_path, method: :get %>
 <%# TODO could potentially do this as a link and style it as a button with css %>
 
-<%= form_with url: top_40_path, method: :get, local: true do |form| %>
+<%= form_with url: movies_index_path, method: :get, local: true do |form| %>
   <%= form.label :movie_title %>
   <%= form.text_field :movie_title %>
   <%= form.submit 'Search Movies' %>
