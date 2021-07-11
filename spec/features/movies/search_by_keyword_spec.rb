@@ -23,8 +23,8 @@ feature 'search movies by keyword' do
         expect(page).to have_link(result[:title])
         expect(page).to have_content("Vote Average: #{result[:vote_average]}")
       end
+      # do something like expect(response.body[:results].count).to eq((css #result).count )
+      # figure out how to do 40 of them at some point
     end
   end
 end
-# TODO figure out how to take take the count of results (use #result css count)
-# and make sure it is less than or equal to 40
