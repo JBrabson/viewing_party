@@ -9,10 +9,14 @@
   <%= form.submit 'Search Movies' %>
 <% end %>
 
-<h3>Results for <%= params[:movie_title].titleize %>:</h3>
-<div id='results'>
-<% @search_results.each do |movie| %>
-  <%= link_to movie.title, movies_show_path(movie.id) %>
-  <p>Vote Average: <%= movie.vote_average %></p>
+<% if @search_results.present? %>
+  <h3>Results for <%= params[:movie_title].titleize %>:</h3>
+  <div id='results'>
+  <% @search_results.each do |movie| %>
+    <%= link_to movie.title, movies_show_path(movie.id) %>
+    <p>Vote Average: <%= movie.vote_average %></p>
+  <% end %>
+  </div>
+<% else %>
+  <h3>Sorry, no results matched the movie title you searched.</h3>
 <% end %>
-</div>

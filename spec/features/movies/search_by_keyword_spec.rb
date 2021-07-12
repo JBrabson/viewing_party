@@ -42,10 +42,34 @@ feature 'search movies by keyword' do
         expect(page).to have_content("Vote Average: #{result[:vote_average]}")
       end
       # do something like expect(response.body[:results].count).to eq((css #result).count )
-      # figure out how to do 40 of them at some point
     end
   end
-  # TODO make a sad path for if there are no results
+
+  it 'displays a message if there are no results' do
+    search_term = "pickles and cheese and rutabagas"
+      response_body = File.read("#{Rails.root}/spec/fixtures/moviedb_api/no_results_title_search.json")
+      stub_request(:get, "https://api.themoviedb.org/3/search/movie?api-key=5f797e906ade46b8521c83edea255f00&query=pickles%20and%20cheese%20and%20rutabagas")
+           .with(
+             headers: {
+            'Accept'=>'*/*',
+            'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+            'User-Agent'=>'Faraday v1.4.1'
+             })
+           .to_return(status: 200, body: response_body, headers: {})
+      stub_request(:get, "https://api.themoviedb.org/3/search/movie?api-key=5f797e906ade46b8521c83edea255f00&page=2&query=pickles%20and%20cheese%20and%20rutabagas")
+            .with(
+             headers: {
+         	  'Accept'=>'*/*',
+         	  'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+         	  'User-Agent'=>'Faraday v1.4.1'
+             })
+             .to_return(status: 200, body: response_body, headers: {})
+      fill_in :movie_title, with: search_term
+      click_button 'Search Movies'
+      expect(page).to have_content("Sorry, no results matched the movie title you searched.")
+  end
 end
 # TODO make a helper method for lines 11-30 since they are called in multiple spec files
 # TODO make a helper method for lines 5-6
+# TODO figure out how to do 40 of them at some point
+# TODO OMG our api key is showing in our stub request GROSS fix it
