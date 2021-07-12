@@ -7,9 +7,9 @@ RSpec.describe MoviePoro do
     movie_poro = MoviePoro.new(single_search_result)
     expect(movie_poro.title).to be_a(String)
     expect(movie_poro.title).to eq("Star Wars")
-    expect(movie_poro.vote_average).to be_a(float)
+    expect(movie_poro.vote_average).to be_a(Float)
     expect(movie_poro.vote_average).to eq(8.2)
-    expect(movie_poro.id).to be_a(integer)
+    expect(movie_poro.id).to be_a(Integer)
     expect(movie_poro.id).to eq(11)
   end
 end
