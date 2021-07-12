@@ -16,16 +16,8 @@ feature 'search movies by keyword' do
     response = response_1_json[:results] + response_2_json[:results]
 
     stub_request(:get, "https://api.themoviedb.org/3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&query=star%20wars")
-         .with(
-           headers: {
-       	  'User-Agent'=>'Faraday v1.4.1'
-           })
          .to_return(status: 200, body: response_body_1, headers: {})
-    stub_request(:get, "https://api.themoviedb.org/3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&page=2&query=star%20wars").
-         with(
-           headers: {
-       	  'User-Agent'=>'Faraday v1.4.1'
-           })
+    stub_request(:get, "https://api.themoviedb.org/3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&page=2&query=star%20wars")
          .to_return(status: 200, body: response_body_2, headers: {})
     fill_in :movie_title, with: search_term
     click_button 'Search Movies'
@@ -44,17 +36,9 @@ feature 'search movies by keyword' do
     search_term = "pickles and cheese and rutabagas"
       response_body = File.read("#{Rails.root}/spec/fixtures/moviedb_api/no_results_title_search.json")
       stub_request(:get, "https://api.themoviedb.org/3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&query=pickles%20and%20cheese%20and%20rutabagas")
-           .with(
-             headers: {
-         	  'User-Agent'=>'Faraday v1.4.1'
-             })
            .to_return(status: 200, body: response_body, headers: {})
       stub_request(:get, "https://api.themoviedb.org/3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&page=2&query=pickles%20and%20cheese%20and%20rutabagas")
-            .with(
-              headers: {
-          	  'User-Agent'=>'Faraday v1.4.1'
-              })
-             .to_return(status: 200, body: response_body, headers: {})
+            .to_return(status: 200, body: response_body, headers: {})
       fill_in :movie_title, with: search_term
       click_button 'Search Movies'
       expect(page).to have_content("Sorry, no results matched the movie title you searched.")
