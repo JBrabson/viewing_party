@@ -8,19 +8,15 @@ describe 'MovieFacade' do
     stub_request(:get, "https://api.themoviedb.org/3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&query=star%20wars")
          .with(
            headers: {
-          'Accept'=>'*/*',
-          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-          'User-Agent'=>'Faraday v1.4.1'
+       	  'User-Agent'=>'Faraday v1.4.1'
            })
          .to_return(status: 200, body: response_body_1, headers: {})
     stub_request(:get, "https://api.themoviedb.org/3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&page=2&query=star%20wars").
          with(
            headers: {
-          'Accept'=>'*/*',
-          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
           'User-Agent'=>'Faraday v1.4.1'
-           }).
-         to_return(status: 200, body: response_body_2, headers: {})
+           })
+         .to_return(status: 200, body: response_body_2, headers: {})
 
     star_wars_search = MovieFacade.search_by_title('star wars')
     expect(star_wars_search).to be_an(Array)

@@ -18,19 +18,15 @@ feature 'search movies by keyword' do
     stub_request(:get, "https://api.themoviedb.org/3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&query=star%20wars")
          .with(
            headers: {
-          'Accept'=>'*/*',
-          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-          'User-Agent'=>'Faraday v1.4.1'
+       	  'User-Agent'=>'Faraday v1.4.1'
            })
          .to_return(status: 200, body: response_body_1, headers: {})
     stub_request(:get, "https://api.themoviedb.org/3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&page=2&query=star%20wars").
          with(
            headers: {
-          'Accept'=>'*/*',
-          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-          'User-Agent'=>'Faraday v1.4.1'
-           }).
-         to_return(status: 200, body: response_body_2, headers: {})
+       	  'User-Agent'=>'Faraday v1.4.1'
+           })
+         .to_return(status: 200, body: response_body_2, headers: {})
     fill_in :movie_title, with: search_term
     click_button 'Search Movies'
     expect(current_path).to eq(movies_index_path)
@@ -50,18 +46,14 @@ feature 'search movies by keyword' do
       stub_request(:get, "https://api.themoviedb.org/3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&query=pickles%20and%20cheese%20and%20rutabagas")
            .with(
              headers: {
-            'Accept'=>'*/*',
-            'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-            'User-Agent'=>'Faraday v1.4.1'
+         	  'User-Agent'=>'Faraday v1.4.1'
              })
            .to_return(status: 200, body: response_body, headers: {})
       stub_request(:get, "https://api.themoviedb.org/3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&page=2&query=pickles%20and%20cheese%20and%20rutabagas")
             .with(
-             headers: {
-         	  'Accept'=>'*/*',
-         	  'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-         	  'User-Agent'=>'Faraday v1.4.1'
-             })
+              headers: {
+          	  'User-Agent'=>'Faraday v1.4.1'
+              })
              .to_return(status: 200, body: response_body, headers: {})
       fill_in :movie_title, with: search_term
       click_button 'Search Movies'

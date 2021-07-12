@@ -8,8 +8,6 @@ RSpec.describe MovieService do
     stub_request(:get, "https://api.themoviedb.org/3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&query=star%20wars")
          .with(
            headers: {
-       	  'Accept'=>'*/*',
-       	  'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
        	  'User-Agent'=>'Faraday v1.4.1'
            })
          .to_return(status: 200, body: response_body_1, headers: {})
@@ -17,11 +15,9 @@ RSpec.describe MovieService do
     stub_request(:get, "https://api.themoviedb.org/3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&page=2&query=star%20wars").
          with(
            headers: {
-       	  'Accept'=>'*/*',
-       	  'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
        	  'User-Agent'=>'Faraday v1.4.1'
-           }).
-         to_return(status: 200, body: response_body_2, headers: {})
+           })
+         .to_return(status: 200, body: response_body_2, headers: {})
     response = MovieService.search_movies_by_title(search_term)
     expect(response).to be_an(Array)
     expect(response.size).to eq(40)
