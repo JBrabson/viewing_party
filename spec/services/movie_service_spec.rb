@@ -25,6 +25,7 @@ RSpec.describe MovieService do
     expect(response).to be_an(Array)
     expect(response.size).to eq(40)
     first_response = response.first
+    expect(first_response).to be_a(Hash)
     expect(first_response).to have_key(:id)
     expect(first_response).to have_key(:title)
     expect(first_response).to have_key(:vote_average)
