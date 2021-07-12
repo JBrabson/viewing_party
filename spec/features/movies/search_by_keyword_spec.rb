@@ -9,8 +9,11 @@ feature 'search movies by keyword' do
 
   it 'returns results' do
     search_term = 'star wars'
-    response_body_1 = File.open("#{Rails.root}/spec/fixtures/moviedb_api/star_wars_search_results_pg_1.json")
-    response_body_2 = File.open("#{Rails.root}/spec/fixtures/moviedb_api/star_wars_search_results_pg_2.json")
+    response_body_1 = File.read("#{Rails.root}/spec/fixtures/moviedb_api/star_wars_search_results_pg_1.json")
+    response_body_2 = File.read("#{Rails.root}/spec/fixtures/moviedb_api/star_wars_search_results_pg_2.json")
+    response_1_json = JSON.parse(response_body_1, symbolize_names: true)
+    response_2_json = JSON.parse(response_body_2, symbolize_names: true)
+    response = response_1_json[:results] + response_2_json[:results]
 
     stub_request(:get, "https://api.themoviedb.org/3/search/movie?api-key=5f797e906ade46b8521c83edea255f00&query=star%20wars")
          .with(
@@ -30,10 +33,11 @@ feature 'search movies by keyword' do
          to_return(status: 200, body: response_body_2, headers: {})
     fill_in :movie_title, with: search_term
     click_button 'Search Movies'
-    expect(current_path).to eq(discover_path)
-    expect(page).to have_content("Results for #{search_term}:")
+    expect(current_path).to eq(movies_index_path)
+    # TODO does this match the wireframe?
+    expect(page).to have_content("Results for #{search_term.titleize}:")
     within('#results') do
-      response_body[:results].each do |result|
+      response.each do |result|
         expect(page).to have_link(result[:title])
         expect(page).to have_content("Vote Average: #{result[:vote_average]}")
       end
@@ -43,3 +47,4 @@ feature 'search movies by keyword' do
   end
 end
 # TODO make a helper method for lines 11-30 since they are called in multiple spec files
+# TODO make a helper method for lines 5-6
