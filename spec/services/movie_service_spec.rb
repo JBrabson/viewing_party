@@ -4,7 +4,7 @@ RSpec.describe MovieService do
   it 'can search moviedb by movie title' do
     search_term = "star wars"
     response_body_1 = File.open("#{Rails.root}/spec/fixtures/moviedb_api/star_wars_search_results_pg_1.json")
-    stub_request(:get, "https://api.themoviedb.org/3/search/movie?api-key=5f797e906ade46b8521c83edea255f00&query=star%20wars")
+    stub_request(:get, "https://api.themoviedb.org/3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&query=star%20wars")
          .with(
            headers: {
        	  'Accept'=>'*/*',
@@ -13,7 +13,7 @@ RSpec.describe MovieService do
            })
          .to_return(status: 200, body: response_body_1, headers: {})
     response_body_2 = File.open("#{Rails.root}/spec/fixtures/moviedb_api/star_wars_search_results_pg_2.json")
-    stub_request(:get, "https://api.themoviedb.org/3/search/movie?api-key=5f797e906ade46b8521c83edea255f00&page=2&query=star%20wars").
+    stub_request(:get, "https://api.themoviedb.org/3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&page=2&query=star%20wars").
          with(
            headers: {
        	  'Accept'=>'*/*',
