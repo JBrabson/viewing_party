@@ -42,3 +42,4 @@ feature 'search movies by keyword' do
     end
   end
 end
+# TODO make a helper method for lines 11-30 since they are called in multiple spec files
