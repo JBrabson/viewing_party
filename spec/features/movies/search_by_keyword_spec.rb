@@ -34,7 +34,6 @@ feature 'search movies by keyword' do
     fill_in :movie_title, with: search_term
     click_button 'Search Movies'
     expect(current_path).to eq(movies_index_path)
-    # TODO does this match the wireframe?
     expect(page).to have_content("Results for #{search_term.titleize}:")
     within('#results') do
       response.each do |result|
