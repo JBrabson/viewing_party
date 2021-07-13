@@ -62,6 +62,12 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+def make_request(verb, endpoint, response)
+  stub_request(verb, "https://api.themoviedb.org/#{endpoint}")
+  .to_return(status: 200, body: response, headers: {})
+end
+
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec

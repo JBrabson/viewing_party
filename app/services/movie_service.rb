@@ -12,4 +12,6 @@ class MovieService
       faraday.params['api-key'] = ENV['MOVIE_API_KEY']
     end
   end
+
+  private_class_method :conn
 end
