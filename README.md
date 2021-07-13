@@ -14,7 +14,7 @@ Viewing party is an application in which users can explore movie options and cre
 
 ## Database Schema
 ![Image of Database Schema]
-(../media/viewing_party_schema.png?raw=true)
+(/media/viewing_party_schema.png)
 
 ## Versions
 
