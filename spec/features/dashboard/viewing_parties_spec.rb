@@ -26,13 +26,13 @@ RSpec.describe "viewing parties" do
     within('#parties') do
       within('#attending') do
         expect(page).to have_link(@friend_hosts_party.movie_title)
-      #   expect(page).to have_content(@friend_hosts_party.start.strftime("%b %e %Y"))
-      #   expect(page).to have_content(@friend_hosts_party.start.strftime("%l:%M %P"))
-      #   expect(page).to have_content("Host: #{@friend.name}")
-      #   expect(page).to have_content(@user.name)
-      #   expect(page).to have_content(@invited.name)
+        expect(page).to have_content(@friend_hosts_party.start.strftime("%b %e %Y"))
+        expect(page).to have_content(@friend_hosts_party.start.strftime("%l:%M %P"))
+        expect(page).to have_content("Host: #{@friend.name}")
+        expect(page).to have_content(@user.name)
+        expect(page).to have_content(@invited.name)
       end
-      # TODO should we be testing that the name is bolded?
+      # TODO test if users name is bold
     end
     # Movie Title, which links to the movie show page
     # Date and Time of Event

@@ -21,6 +21,16 @@
 <div id="parties">
   <h3>Your Viewing Parties</h3>
   <div id="attending">
-
+    <% @user.parties.each do |party| %>
+      <%= party.movie_title %>
+      <%= party.date %>
+      <%= party.start %>
+      <p>Host: <%= party.host %></p>
+      <p>Guests:</p>
+      <% party.invitees.each do |invitee| %>
+        <%= invitee.name %>
+      <% end %>
   </div>
 </div>
+
+<!-- TODO make user's name bold in attending guests section -->
