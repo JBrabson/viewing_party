@@ -21,15 +21,15 @@
 <div id="parties">
   <h3>Your Viewing Parties</h3>
   <div id="attending">
-    <% @user.parties.each do |party| %>
-      <%= party.movie_title %>
-      <%= party.date %>
-      <%= party.start %>
-      <p>Host: <%= party.host %></p>
-      <p>Guests:</p>
+    <% @user.invited_parties.each do |party| %>
+      <%= link_to "#{party.movie_title}", "/movies/show/#{party.movie_id}" %>
+      <p> Hosted by: <%= party.host.name %> </p>
+      <p> Start time: <%= party.date %> at <%= party.start_time %>
+      <p> Guests: </p>
       <% party.invitees.each do |invitee| %>
         <%= invitee.name %>
       <% end %>
+    <% end %>
   </div>
 </div>
 

@@ -23,21 +23,18 @@ RSpec.describe "viewing parties" do
   end
 
   it 'shows parties I am invited to on the dashboard' do
+    save_and_open_page
     within('#parties') do
       within('#attending') do
         expect(page).to have_link(@friend_hosts_party.movie_title)
-        expect(page).to have_content(@friend_hosts_party.start.strftime("%b %e %Y"))
+        expect(page).to have_content(@friend_hosts_party.start.strftime("%D"))
         expect(page).to have_content(@friend_hosts_party.start.strftime("%l:%M %P"))
-        expect(page).to have_content("Host: #{@friend.name}")
+        expect(page).to have_content("Hosted by: #{@friend.name}")
         expect(page).to have_content(@user.name)
         expect(page).to have_content(@invited.name)
       end
       # TODO test if users name is bold
     end
-    # Movie Title, which links to the movie show page
-    # Date and Time of Event
-    # who is hosting the event
-    # list of friends invited, with my name in bold
   end
 
   # it 'shows parties I have created on the dashboard' do
