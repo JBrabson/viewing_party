@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
-  has_many :parties, dependent: :destroy, inverse_of: :host
-  has_many :invitations, dependent: :destroy, inverse_of: :invitee
-  has_many :parties, through: :invitations
+  has_many :hosted_parties, class_name: 'Party', dependent: :destroy, foreign_key: :host_id
+  has_many :invitations, dependent: :destroy, foreign_key: :invitee_id
+  has_many :invited_parties, through: :invitations, source: :party
 end

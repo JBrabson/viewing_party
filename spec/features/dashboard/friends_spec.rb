@@ -7,7 +7,7 @@ RSpec.describe 'user dashboard' do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
     visit '/dashboard'
   end
-  
+
   describe 'has a friends section' do
     it 'has a header' do
       expect(page).to have_content('Your Friends')

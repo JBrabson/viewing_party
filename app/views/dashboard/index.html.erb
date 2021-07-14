@@ -18,4 +18,31 @@
     <% end %>
   <% end %>
 </div>
-<h3>Your Viewing Parties</h3>
+<div id="parties">
+  <h3>Your Viewing Parties</h3>
+  <div id="attending">
+    <h4>Attending:</h4>
+    <% @user.invited_parties.each do |party| %>
+      <%= link_to "#{party.movie_title}", "/movies/show/#{party.movie_id}" %>
+      <p> Hosted by: <%= party.host.name %> </p>
+      <p> Start time: <%= party.date %> at <%= party.start_time %> </p>
+      <p> Guests: </p>
+      <% party.invitees.each do |invitee| %>
+        <%= invitee.name %>
+      <% end %>
+    <% end %>
+  </div>
+  <div id="hosting">
+    <h4>Hosting:</h4>
+    <% @user.hosted_parties.each do |party| %>
+      <%= link_to "#{party.movie_title}", "/movies/show/#{party.movie_id}" %>
+      <p> Start time: <%= party.date %> at <%= party.start_time %> </p>
+      <p> Guests: </p>
+      <% party.invitees.each do |invitee| %>
+        <%= invitee.name %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<!-- TODO !!! make user's name bold in attending guests section -->
