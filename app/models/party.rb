@@ -10,10 +10,10 @@ class Party < ApplicationRecord
   has_many :invitees, through: :invitations
 
   def start_time
-    start.strftime("%l:%M %P")
+    start.strftime('%l:%M %P')
   end
 
   def date
-    start.strftime("%D")
+    start.strftime('%D')
   end
 end

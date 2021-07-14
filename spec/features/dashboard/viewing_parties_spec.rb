@@ -27,8 +27,8 @@ RSpec.describe "viewing parties" do
       within('#attending') do
         expect(page).to have_content("Attending")
         expect(page).to have_link(@friend_hosts_party.movie_title)
-        expect(page).to have_content(@friend_hosts_party.start.strftime("%D"))
-        expect(page).to have_content(@friend_hosts_party.start.strftime("%l:%M %P"))
+        expect(page).to have_content(@friend_hosts_party.start.strftime('%D'))
+        expect(page).to have_content(@friend_hosts_party.start.strftime('%l:%M %P'))
         expect(page).to have_content("Hosted by: #{@friend.name}")
         expect(page).to have_content(@user.name)
         expect(page).to have_content(@invited.name)
@@ -42,8 +42,8 @@ RSpec.describe "viewing parties" do
       within('#hosting') do
         expect(page).to have_content("Hosting")
         expect(page).to have_link(@user_hosts_party.movie_title)
-        expect(page).to have_content(@user_hosts_party.start.strftime("%D"))
-        expect(page).to have_content(@user_hosts_party.start.strftime("%l:%M %P"))
+        expect(page).to have_content(@user_hosts_party.start.strftime('%D'))
+        expect(page).to have_content(@user_hosts_party.start.strftime('%l:%M %P'))
         expect(page).to have_content(@friend.name)
         expect(page).to have_content(@invited.name)
       end
