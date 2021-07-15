@@ -6,10 +6,12 @@ class MoviePoro
     options[:details_hash] ||= {}
     options[:cast_hash] ||= {}
     options[:reviews_hash] ||= {}
+    options[:popular_hash] ||= {}
 
-    @title = options[:search_hash][:title] || options[:details_hash][:title]
-    @vote_average = options[:search_hash][:vote_average] || options[:details_hash][:vote_average]
-    @id = options[:search_hash][:id] || options[:details_hash][:id]
+
+    @title = options[:search_hash][:title] || options[:details_hash][:title] || options[:popular_hash][:title]
+    @vote_average = options[:search_hash][:vote_average] || options[:details_hash][:vote_average] || options[:popular_hash][:vote_average]
+    @id = options[:search_hash][:id] || options[:details_hash][:id] || options[:popular_hash][:id]
     @runtime = options[:details_hash][:runtime] || nil
     @genres_array = options[:details_hash][:genres] || []
     @summary = options[:details_hash][:overview] || ""
