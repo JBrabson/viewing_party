@@ -11,5 +11,10 @@ class MovieFacade
     cast = MovieService.get_movie_details("#{movie_id}/credits")
     reviews = MovieService.get_movie_details("#{movie_id}/reviews")
     MoviePoro.new(details_hash: movie_details, cast_hash: cast, reviews_hash: reviews)
+  def self.top40
+    response = MovieService.top40
+    response.map do |result|
+      MoviePoro.new(result)
+    end
   end
 end

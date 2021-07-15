@@ -9,7 +9,16 @@
   <%= form.submit 'Search Movies' %>
 <% end %>
 
-<% if @search_results.present? %>
+<% if @top40.present? %>
+<div id="top40">
+  <% @top40.each do |movie| %>
+    <div class="result">
+      <li><%= link_to "#{movie.title}", movies_show_path(movie.id), method: :get %> Vote Average: <%= movie.vote_average %></li>
+    </div>
+  <% end %>
+</div>
+
+<% elsif @search_results.present? %>
   <h3>Results for <%= params[:movie_title].titleize %>:</h3>
   <div id='results'>
   <% @search_results.each do |movie| %>
@@ -17,6 +26,6 @@
     <p>Vote Average: <%= movie.vote_average %></p>
   <% end %>
   </div>
-<% else %>
+<% elsif !@search_results.present? && !@top40.present? %>
   <h3>Sorry, no results matched the movie title you searched.</h3>
 <% end %>
