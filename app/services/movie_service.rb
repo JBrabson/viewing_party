@@ -7,6 +7,21 @@ class MovieService
     response1_json[:results] + response2_json[:results]
   end
 
+  def self.get_movie_details(type)
+    response = conn.get("/3/movie/#{type}?")
+    JSON.parse(response.body, symbolize_names: true)
+  end
+
+  # def self.get_cast(movie_id)
+  #   response = conn.get("/3/movie/#{movie_id}/credits?")
+  #   JSON.parse(response.body, symbolize_names: true)
+  # end
+  #
+  # def self.get_reviews(movie_id)
+  #   response = conn.get("/3/movie/#{movie_id}/reviews?")
+  #   JSON.parse(response.body, symbolize_names: true)
+  # end
+
   def self.top40
     response1 = conn.get('/3/movie/top_rated?')
     response1_json = JSON.parse(response1.body, symbolize_names: true)

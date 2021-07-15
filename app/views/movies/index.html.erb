@@ -13,7 +13,7 @@
 <div id="top40">
   <% @top40.each do |movie| %>
     <div class="result">
-      <li><%= link_to "#{movie.title}", movies_show_path(movie.id), method: :get %> Vote Average: <%= movie.vote_average %></li>
+      <li><%= link_to "#{movie.title}", "/movies/#{movie.id}", method: :get %> Vote Average: <%= movie.vote_average %></li>
     </div>
   <% end %>
 </div>
@@ -22,7 +22,7 @@
   <h3>Results for <%= params[:movie_title].titleize %>:</h3>
   <div id='results'>
   <% @search_results.each do |movie| %>
-    <%= link_to movie.title, movies_show_path(movie.id) %>
+    <%= link_to movie.title, "/movies/#{movie.id}" %>
     <p>Vote Average: <%= movie.vote_average %></p>
   <% end %>
   </div>
