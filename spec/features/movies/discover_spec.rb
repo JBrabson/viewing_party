@@ -8,7 +8,7 @@ RSpec.describe 'movie discover page' do
   end
 
   describe 'Top Rated Movies section' do
-    it 'has a button to find top rated movies' do
+    before :each do
       page1 = File.read("#{Rails.root}/spec/fixtures/moviedb_api/top_40_results_pg_1.json")
       page2 = File.read("#{Rails.root}/spec/fixtures/moviedb_api/top_40_results_pg_2.json")
       page_1_json = JSON.parse(page1, symbolize_names: true)
@@ -32,7 +32,9 @@ RSpec.describe 'movie discover page' do
               'User-Agent'=>'Faraday v1.4.1'
               }).
             to_return(status: 200, body: page2, headers: {})
+    end
 
+    it 'has a button to find top rated movies' do
       expect(page).to have_button('Find Top Rated Movies')
       click_button('Find Top Rated Movies')
       expect(current_path).to eq(movies_index_path)
@@ -43,7 +45,12 @@ RSpec.describe 'movie discover page' do
       end
     end
 
-    xit 'displays each movie title as link to movie show page' do
+    it 'displays each movie title as link to movie show page' do
+      click_button('Find Top Rated Movies')
+      within ("#top40") do
+        expect(page).to have_link(count: 40)
+        #TODO test for route to show page
+      end
     end
   end
 
