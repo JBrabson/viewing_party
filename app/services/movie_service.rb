@@ -7,6 +7,21 @@ class MovieService
     response1_json[:results] + response2_json[:results]
   end
 
+  def self.get_movie_details(type)
+    response = conn.get("/3/movie/#{type}?")
+    JSON.parse(response.body, symbolize_names: true)
+  end
+
+  # def self.get_cast(movie_id)
+  #   response = conn.get("/3/movie/#{movie_id}/credits?")
+  #   JSON.parse(response.body, symbolize_names: true)
+  # end
+  #
+  # def self.get_reviews(movie_id)
+  #   response = conn.get("/3/movie/#{movie_id}/reviews?")
+  #   JSON.parse(response.body, symbolize_names: true)
+  # end
+
   def self.conn
     Faraday.new(url: 'https://api.themoviedb.org') do |faraday|
       faraday.params['api_key'] = ENV['MOVIE_API_KEY']

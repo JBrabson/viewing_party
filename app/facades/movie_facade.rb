@@ -8,8 +8,8 @@ class MovieFacade
 
   def self.movie_details(movie_id)
     movie_details = MovieService.get_movie_details(movie_id)
-    cast = MovieService.get_cast(movie_id)
-    reviews = MovieService.get_reviews(movie_id)
+    cast = MovieService.get_cast("#{movie_id}/credits")
+    reviews = MovieService.get_reviews("#{movie_id}/reviews")
     MoviePoro.new(details_hash: movie_details, cast_hash: cast, reviews_hash: reviews)
   end
 end
