@@ -1,21 +1,22 @@
 <h1><%= @movie.title %></h1>
-
+<%= link_to 'Create Viewing Party', "/parties/new", movie_id: @movie.id %>
 <p>Runtime: <%= @movie.formatted_runtime %></p>
+<p>Average Vote: <%= @movie.vote_average %></p>
 
-<h5>What kind of movie is <%= @movie.title %>?</h5>
+<h2>What kind of movie is <%= @movie.title %>?</h2>
 <% @movie.genres.each do |genre| %>
   <p><%= genre %></p>
 <% end %>
 
-<h3>What's <%= @movie.title %> movie about:</h3>
+<h2>What's <%= @movie.title %> movie about:</h2>
 <p><%= @movie.summary %></p>
 
-<h3>Who is in <%= @movie.title %>:</h3>
-<% @movie.cast.each do |cast_member| %>
-  <p><%= cast_member[:character] %> played by <%= cast_member[:actor] %></p>
+<h2>Who is in <%= @movie.title %>:</h2>
+<% @movie.cast.take(10).each do |cast_member| %>
+  <p><%= cast_member[:character] %> played by <%= cast_member[:name] %></p>
 <% end %>
 
-<h3>What people think about <%= @movie.title %>:</h3>
+<h2>What people think about <%= @movie.title %>:</h2>
 <%= @movie.reviews.count %>
 
 <% @movie.reviews.each do |review| %>
