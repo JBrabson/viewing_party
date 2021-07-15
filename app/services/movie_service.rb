@@ -9,7 +9,7 @@ class MovieService
 
   def self.conn
     Faraday.new(url: 'https://api.themoviedb.org') do |faraday|
-      faraday.params['api-key'] = ENV['MOVIE_API_KEY']
+      faraday.params['api_key'] = ENV['MOVIE_API_KEY']
     end
   end
 
