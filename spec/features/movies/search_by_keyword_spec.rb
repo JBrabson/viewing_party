@@ -15,8 +15,8 @@ feature 'search movies by keyword' do
     response_2_json = JSON.parse(response_body_2, symbolize_names: true)
     response = response_1_json[:results] + response_2_json[:results]
 
-    make_request(:get, "3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&query=star%20wars", response_body_1)
-    make_request(:get, "3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&query=star%20wars&page=2", response_body_2)
+    make_request(:get, "3/search/movie?api_key=#{ENV['MOVIE_API_KEY']}&query=star%20wars", response_body_1)
+    make_request(:get, "3/search/movie?api_key=#{ENV['MOVIE_API_KEY']}&query=star%20wars&page=2", response_body_2)
 
     fill_in :movie_title, with: search_term
     click_button 'Search Movies'
@@ -35,8 +35,8 @@ feature 'search movies by keyword' do
     search_term = "pickles and cheese and rutabagas"
       response_body = File.read("#{Rails.root}/spec/fixtures/moviedb_api/no_results_title_search.json")
 
-      make_request(:get, "3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&query=pickles%20and%20cheese%20and%20rutabagas", response_body)
-      make_request(:get, "3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&query=pickles%20and%20cheese%20and%20rutabagas&page=2", response_body)
+      make_request(:get, "3/search/movie?api_key=#{ENV['MOVIE_API_KEY']}&query=pickles%20and%20cheese%20and%20rutabagas", response_body)
+      make_request(:get, "3/search/movie?api_key=#{ENV['MOVIE_API_KEY']}&query=pickles%20and%20cheese%20and%20rutabagas&page=2", response_body)
 
       fill_in :movie_title, with: search_term
       click_button 'Search Movies'

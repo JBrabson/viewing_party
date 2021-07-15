@@ -13,7 +13,7 @@
   <h3>Results for <%= params[:movie_title].titleize %>:</h3>
   <div id='results'>
   <% @search_results.each do |movie| %>
-    <%= link_to movie.title, movies_show_path(movie.id) %>
+    <%= link_to movie.title, "/movies/#{movie.id}" %>
     <p>Vote Average: <%= movie.vote_average %></p>
   <% end %>
   </div>

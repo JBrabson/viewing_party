@@ -1,0 +1,24 @@
+<h1><%= @movie.title %></h1>
+
+<p>Runtime: <%= @movie.formatted_runtime %></p>
+
+<h5>What kind of movie is <%= @movie.title %>?</h5>
+<% @movie.genres.each do |genre| %>
+  <p><%= genre %></p>
+<% end %>
+
+<h3>What's <%= @movie.title %> movie about:</h3>
+<p><%= @movie.summary %></p>
+
+<h3>Who is in <%= @movie.title %>:</h3>
+<% @movie.cast.each do |cast_member| %>
+  <p><%= cast_member[:character] %> played by <%= cast_member[:actor] %></p>
+<% end %>
+
+<h3>What people think about <%= @movie.title %>:</h3>
+<%= @movie.reviews.count %>
+
+<% @movie.reviews.each do |review| %>
+  <p><%= review[:content] %></p>
+  <p>By: <%= review[:author] %> </p>
+<% end %>

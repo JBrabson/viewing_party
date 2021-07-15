@@ -10,19 +10,18 @@ RSpec.describe 'movies show page' do
     response_body_1 = File.read("#{Rails.root}/spec/fixtures/moviedb_api/star_wars_search_results_pg_1.json")
     response_body_2 = File.read("#{Rails.root}/spec/fixtures/moviedb_api/star_wars_search_results_pg_2.json")
     star_wars_details = JSON.parse(File.read("#{Rails.root}/spec/fixtures/moviedb_api/star_wars_custom_details.json"), symbolize_names: true)
-    make_request(:get, "3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&query=star%20wars", response_body_1)
-    make_request(:get, "3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&query=star%20wars&page=2", response_body_2)
+    make_request(:get, "3/search/movie?api_key=#{ENV['MOVIE_API_KEY']}&query=star%20wars", response_body_1)
+    make_request(:get, "3/search/movie?api_key=#{ENV['MOVIE_API_KEY']}&query=star%20wars&page=2", response_body_2)
 
-    #
     fill_in :movie_title, with: search_term
     click_button 'Search Movies'
     click_link star_wars_details[:title].titleize
-    expect(current_path).to eq(movies_show_path(star_wars_details[:id]))
+    expect(current_path).to eq("/movies/#{star_wars_details[:id]}")
     expect(page).to have_content(star_wars_details[:title])
     expect(page).to have_content(star_wars_details[:vote_average])
 
-    # TODO  runtime in hours and minutes
-    # expect(page).to have_content(star_wars_details[:vote_average])
+    # runtime in minutes
+    expect(page).to have_content("Runtime: 1:01")
 
     # genre
     star_wars_details[:genres].each do |genre|
