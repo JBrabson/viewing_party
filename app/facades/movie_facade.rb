@@ -2,7 +2,7 @@ class MovieFacade
   def self.search_by_title(movie_title)
     response = MovieService.search_movies_by_title(movie_title)
     response.map do |result|
-      MoviePoro.new(search_hash: result)
+      MoviePoro.new(result)
     end
   end
 
@@ -25,7 +25,7 @@ class MovieFacade
   def self.top40
     response = MovieService.top40
     response.map do |result|
-      MoviePoro.new(popular_hash: result)
+      MoviePoro.new(result)
     end
   end
 end
