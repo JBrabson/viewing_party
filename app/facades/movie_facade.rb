@@ -6,7 +6,7 @@ class MovieFacade
     end
   end
 
-  def self.search_by_id(movie_id)
+  def self.movie_details(movie_id)
     movie_details = MovieService.get_movie_details(movie_id)
     cast = MovieService.get_cast(movie_id)
     reviews = MovieService.get_reviews(movie_id)
