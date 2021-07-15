@@ -6,8 +6,8 @@ RSpec.describe MovieService do
     response_body_1 = File.open("#{Rails.root}/spec/fixtures/moviedb_api/star_wars_search_results_pg_1.json")
     response_body_2 = File.open("#{Rails.root}/spec/fixtures/moviedb_api/star_wars_search_results_pg_2.json")
 
-    make_request(:get, "3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&query=star%20wars", response_body_1)
-    make_request(:get, "3/search/movie?api-key=#{ENV['MOVIE_API_KEY']}&query=star%20wars&page=2", response_body_2)
+    make_request(:get, "3/search/movie?api_key=#{ENV['MOVIE_API_KEY']}&query=star%20wars", response_body_1)
+    make_request(:get, "3/search/movie?api_key=#{ENV['MOVIE_API_KEY']}&query=star%20wars&page=2", response_body_2)
 
     response = MovieService.search_movies_by_title(search_term)
 

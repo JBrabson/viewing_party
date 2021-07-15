@@ -5,4 +5,11 @@ class MovieFacade
       MoviePoro.new(result)
     end
   end
+
+  def self.top40
+    response = MovieService.top40
+    response.map do |result|
+      MoviePoro.new(result)
+    end
+  end
 end
