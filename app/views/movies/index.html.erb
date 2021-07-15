@@ -13,7 +13,7 @@
 <div id="top40">
   <% @top40.each do |movie| %>
     <div class="result">
-      <li><%= link_to "#{movie.title}", movies_show_path(movie.id), method: :get %> Vote Average: <%= movie.vote_average %></li>
+      <li><%= link_to "#{movie.title}", "/movies/#{movie.id}", method: :get %> Vote Average: <%= movie.vote_average %></li>
     </div>
   <% end %>
 </div>
