@@ -16,7 +16,7 @@ RSpec.describe 'movies show page' do
     visit "/movies/#{star_wars_details[:id]}"
     expect(page).to have_content(star_wars_details[:title])
     expect(page).to have_content(star_wars_details[:vote_average])
-save_and_open_page
+
     # runtime in minutes
     expect(page).to have_content("Runtime: 2:01")
 
