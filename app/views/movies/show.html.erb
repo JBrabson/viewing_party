@@ -13,13 +13,13 @@
 
 <h2>Who is in <%= @movie.title %>:</h2>
 <% @movie.cast.take(10).each do |cast_member| %>
-  <p><%= cast_member[:character] %> played by <%= cast_member[:name] %></p>
+  <p><%= cast_member.character %> played by <%= cast_member.name %></p>
 <% end %>
 
 <h2>What people think about <%= @movie.title %>:</h2>
-<%= @movie.reviews.count %>
+<p>Total Reviews: <%= @movie.reviews.count %></p>
 
 <% @movie.reviews.each do |review| %>
-  <p><%= review[:content] %></p>
-  <p>By: <%= review[:author] %> </p>
+  <p><%= review.content %></p>
+  <p>By: <%= review.author %> </p>
 <% end %>
