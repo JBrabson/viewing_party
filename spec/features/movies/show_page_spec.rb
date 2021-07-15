@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'movies show page' do
-  it 'has a button to creat a viewing party' do
+  it 'has movie details' do
     @user = User.create!(email: 'test@app.com', name: 'n4me', password: 'passw0rd')
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
     visit discover_path
