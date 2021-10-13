@@ -1,0 +1,17 @@
+<h1>Viewing Party for "<%=@movie_title %>"</h1>
+<%= form_with url: parties_new_path, method: :get, local: true do |form| %>
+  <%= form.label :duration %>
+  <%= form.text_field :duration, value: @movie_runtime %>
+  <%= form.label :when %>
+  <%= form.date_select :when, :order => [:month, :day, :year] %>
+  <%= form.label :start_time %>
+  <%= form.time_select :start_time, :ampm => [true] %> <br> <br>
+  <section class="friends">
+    <%= form.label 'Invite Friends:' %><br>
+    <%= form.collection_check_boxes(:friends, current_user.friends, :id, :email, include_hidden: false) do |friend| %>
+    <%= friend.check_box %>
+    <%= friend.label %>
+    <% end %>
+  </section><br>
+  <%= form.submit 'Create Party!' %>
+<% end %>
